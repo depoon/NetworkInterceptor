@@ -23,24 +23,19 @@ extension CustormUrlProtocolRequestInterceptor: RequestInterceptor {
 @objc public class CustormUrlProtocolRequestInterceptor: NSObject{
 
     func swizzleProtocolClasses(){
-        NSLog("swizzleProtocolClasses 0")
         let instance = URLSessionConfiguration.default
-        NSLog("swizzleProtocolClasses 1")
         let uRLSessionConfigurationClass: AnyClass = object_getClass(instance)!
-        NSLog("swizzleProtocolClasses 2")
-        let m1: Method = class_getInstanceMethod(uRLSessionConfigurationClass, #selector(getter: uRLSessionConfigurationClass.protocolClasses))!
-        NSLog("swizzleProtocolClasses 3")
-        let m2: Method = class_getInstanceMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.swizzle_protocolClasses))!
-        NSLog("swizzleProtocolClasses 4")
-        method_exchangeImplementations(m1, m2)
-        NSLog("swizzleProtocolClasses 5")
+
+        let method1: Method = class_getInstanceMethod(uRLSessionConfigurationClass, #selector(getter: uRLSessionConfigurationClass.protocolClasses))!
+        let method2: Method = class_getInstanceMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.swizzle_protocolClasses))!
+
+        method_exchangeImplementations(method1, method2)
     }
 }
 
 extension URLSessionConfiguration {
     
     @objc func swizzle_protocolClasses() -> [AnyClass]? {
-        NSLog("swizzle_protocolClasses 0")
         var originalProtocolClasses = self.swizzle_protocolClasses()
         originalProtocolClasses?.insert(CustormUrlProtocol.self, at: 0)
         return originalProtocolClasses
