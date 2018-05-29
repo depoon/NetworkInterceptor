@@ -10,12 +10,12 @@ import Foundation
 
 extension CustomUrlProtocolRequestInterceptor: RequestInterceptor {
     public func startRecording() {
-        URLProtocol.registerClass(CustormUrlProtocol.self)
+        URLProtocol.registerClass(CustomUrlProtocol.self)
         swizzleProtocolClasses()
     }
     
     public func stopRecording() {
-        URLProtocol.unregisterClass(CustormUrlProtocol.self)
+        URLProtocol.unregisterClass(CustomUrlProtocol.self)
         swizzleProtocolClasses()
     }
 }
@@ -27,7 +27,7 @@ extension CustomUrlProtocolRequestInterceptor: RequestInterceptor {
         let uRLSessionConfigurationClass: AnyClass = object_getClass(instance)!
 
         let method1: Method = class_getInstanceMethod(uRLSessionConfigurationClass, #selector(getter: uRLSessionConfigurationClass.protocolClasses))!
-        let method2: Method = class_getInstanceMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.swizzle_protocolClasses))!
+        let method2: Method = class_getInstanceMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.fakeProcotolClasses))!
 
         method_exchangeImplementations(method1, method2)
     }
@@ -35,20 +35,20 @@ extension CustomUrlProtocolRequestInterceptor: RequestInterceptor {
 
 extension URLSessionConfiguration {
     
-    @objc func swizzle_protocolClasses() -> [AnyClass]? {
+    @objc func fakeProcotolClasses() -> [AnyClass]? {
         
-        var originalProtocolClasses = self.swizzle_protocolClasses()
+        var originalProtocolClasses = self.fakeProcotolClasses()
         if let doesContain = originalProtocolClasses?.contains(where: { protocolClass in
-            return protocolClass == CustormUrlProtocol.self
+            return protocolClass == CustomUrlProtocol.self
         }), !doesContain {
-            originalProtocolClasses?.insert(CustormUrlProtocol.self, at: 0)
+            originalProtocolClasses?.insert(CustomUrlProtocol.self, at: 0)
         }
         return originalProtocolClasses
     }
     
 }
 
-class CustormUrlProtocol: URLProtocol {
+class CustomUrlProtocol: URLProtocol {
     
     var connection: NSURLConnection?
     var response: URLResponse?
@@ -65,7 +65,7 @@ class CustormUrlProtocol: URLProtocol {
         guard ["http", "https"].contains(scheme) else {
             return false
         }
-        if let _ = URLProtocol.property(forKey: "CustormUrlProtocol", in: request) {
+        if let _ = URLProtocol.property(forKey: "CustomUrlProtocol", in: request) {
             return false
         }
         
@@ -82,7 +82,7 @@ class CustormUrlProtocol: URLProtocol {
     
     open override class func canonicalRequest(for request: URLRequest) -> URLRequest {
         let mutableRequest: NSMutableURLRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
-        URLProtocol.setProperty("YES", forKey: "CustormUrlProtocol", in: mutableRequest)
+        URLProtocol.setProperty("YES", forKey: "CustomUrlProtocol", in: mutableRequest)
         return mutableRequest.copy() as! URLRequest
     }
     
@@ -99,7 +99,7 @@ class CustormUrlProtocol: URLProtocol {
     
 }
 
-extension CustormUrlProtocol: NSURLConnectionDelegate {
+extension CustomUrlProtocol: NSURLConnectionDelegate {
     
     public func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
         self.client?.urlProtocol(self, didFailWithError: error)
@@ -120,7 +120,7 @@ extension CustormUrlProtocol: NSURLConnectionDelegate {
     
 }
 
-extension CustormUrlProtocol: NSURLConnectionDataDelegate {
+extension CustomUrlProtocol: NSURLConnectionDataDelegate {
     
     
     public func connection(_ connection: NSURLConnection, willSend request: URLRequest, redirectResponse response: URLResponse?) -> URLRequest? {
