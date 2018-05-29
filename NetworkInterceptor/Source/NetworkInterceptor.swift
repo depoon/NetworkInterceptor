@@ -33,7 +33,7 @@ public protocol RequestLogger: class {
     
     
     private override init(){        
-        interceptors = [ CustormUrlProtocolRequestInterceptor() ]
+        interceptors = [ CustomUrlProtocolRequestInterceptor() ]
         loggers = [ SlackRequestLogger() ]
     }
     

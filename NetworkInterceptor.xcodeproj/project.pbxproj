@@ -10,7 +10,7 @@
 		1C831DBC20B9A3AE003648C6 /* NetworkInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C831DBA20B9A3AE003648C6 /* NetworkInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C831DC420B9A3E8003648C6 /* NetworkInterceptorCodeInjection.m in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC320B9A3E8003648C6 /* NetworkInterceptorCodeInjection.m */; };
 		1C831DC620B9A420003648C6 /* NetworkInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */; };
-		1C831DC920B9A706003648C6 /* CustormUrlProtocolRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC820B9A706003648C6 /* CustormUrlProtocolRequestInterceptor.swift */; };
+		1C831DC920B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC820B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift */; };
 		1C831DCB20B9A7A7003648C6 /* URLRequest+cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */; };
 		1C831DCE20B9AA03003648C6 /* SlackRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DCD20B9AA03003648C6 /* SlackRequestLogger.swift */; };
 /* End PBXBuildFile section */
@@ -21,7 +21,7 @@
 		1C831DBB20B9A3AE003648C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C831DC320B9A3E8003648C6 /* NetworkInterceptorCodeInjection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkInterceptorCodeInjection.m; sourceTree = "<group>"; };
 		1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptor.swift; sourceTree = "<group>"; };
-		1C831DC820B9A706003648C6 /* CustormUrlProtocolRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustormUrlProtocolRequestInterceptor.swift; sourceTree = "<group>"; };
+		1C831DC820B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUrlProtocolRequestInterceptor.swift; sourceTree = "<group>"; };
 		1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+cURL.swift"; sourceTree = "<group>"; };
 		1C831DCD20B9AA03003648C6 /* SlackRequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackRequestLogger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -78,7 +78,7 @@
 		1C831DC720B9A6DF003648C6 /* RequestInterceptor */ = {
 			isa = PBXGroup;
 			children = (
-				1C831DC820B9A706003648C6 /* CustormUrlProtocolRequestInterceptor.swift */,
+				1C831DC820B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift */,
 			);
 			path = RequestInterceptor;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			files = (
 				1C831DC620B9A420003648C6 /* NetworkInterceptor.swift in Sources */,
 				1C831DCB20B9A7A7003648C6 /* URLRequest+cURL.swift in Sources */,
-				1C831DC920B9A706003648C6 /* CustormUrlProtocolRequestInterceptor.swift in Sources */,
+				1C831DC920B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift in Sources */,
 				1C831DC420B9A3E8003648C6 /* NetworkInterceptorCodeInjection.m in Sources */,
 				1C831DCE20B9AA03003648C6 /* SlackRequestLogger.swift in Sources */,
 			);
