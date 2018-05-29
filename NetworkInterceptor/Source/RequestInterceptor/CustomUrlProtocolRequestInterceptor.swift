@@ -1,5 +1,5 @@
 //
-//  CustormUrlProtocolRequestInterceptor.swift
+//  CustomUrlProtocolRequestInterceptor.swift
 //  NetworkInterceptor
 //
 //  Created by Kenneth Poon on 26/5/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension CustormUrlProtocolRequestInterceptor: RequestInterceptor {
+extension CustomUrlProtocolRequestInterceptor: RequestInterceptor {
     public func startRecording() {
         URLProtocol.registerClass(CustormUrlProtocol.self)
         swizzleProtocolClasses()
@@ -20,7 +20,7 @@ extension CustormUrlProtocolRequestInterceptor: RequestInterceptor {
     }
 }
 
-@objc public class CustormUrlProtocolRequestInterceptor: NSObject{
+@objc public class CustomUrlProtocolRequestInterceptor: NSObject{
 
     func swizzleProtocolClasses(){
         let instance = URLSessionConfiguration.default
@@ -36,8 +36,13 @@ extension CustormUrlProtocolRequestInterceptor: RequestInterceptor {
 extension URLSessionConfiguration {
     
     @objc func swizzle_protocolClasses() -> [AnyClass]? {
+        
         var originalProtocolClasses = self.swizzle_protocolClasses()
-        originalProtocolClasses?.insert(CustormUrlProtocol.self, at: 0)
+        if let doesContain = originalProtocolClasses?.contains(where: { protocolClass in
+            return protocolClass == CustormUrlProtocol.self
+        }), !doesContain {
+            originalProtocolClasses?.insert(CustormUrlProtocol.self, at: 0)
+        }
         return originalProtocolClasses
     }
     
@@ -60,7 +65,7 @@ class CustormUrlProtocol: URLProtocol {
         guard ["http", "https"].contains(scheme) else {
             return false
         }
-        if let _ = URLProtocol.property(forKey: String(describing: type(of: self)), in: request) {
+        if let _ = URLProtocol.property(forKey: "CustormUrlProtocol", in: request) {
             return false
         }
         
@@ -72,12 +77,12 @@ class CustormUrlProtocol: URLProtocol {
         NSLog("Request #\(requestCount): CURL => \(request.cURL)")
         NetworkInterceptor.shared.logRequest(urlRequest: request)
         
-        return true
+        return false
     }
     
     open override class func canonicalRequest(for request: URLRequest) -> URLRequest {
         let mutableRequest: NSMutableURLRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
-        URLProtocol.setProperty("YES", forKey: String(describing: type(of: self)), in: mutableRequest)
+        URLProtocol.setProperty("YES", forKey: "CustormUrlProtocol", in: mutableRequest)
         return mutableRequest.copy() as! URLRequest
     }
     
