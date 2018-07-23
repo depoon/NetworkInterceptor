@@ -10,12 +10,12 @@ import Foundation
 
 extension CustomUrlProtocolRequestInterceptor: RequestInterceptor {
     public func startRecording() {
-        URLProtocol.registerClass(CustormUrlProtocol.self)
+        URLProtocol.registerClass(CustomUrlProtocol.self)
         swizzleProtocolClasses()
     }
     
     public func stopRecording() {
-        URLProtocol.unregisterClass(CustormUrlProtocol.self)
+        URLProtocol.unregisterClass(CustomUrlProtocol.self)
         swizzleProtocolClasses()
     }
 }
@@ -27,7 +27,7 @@ extension CustomUrlProtocolRequestInterceptor: RequestInterceptor {
         let uRLSessionConfigurationClass: AnyClass = object_getClass(instance)!
 
         let method1: Method = class_getInstanceMethod(uRLSessionConfigurationClass, #selector(getter: uRLSessionConfigurationClass.protocolClasses))!
-        let method2: Method = class_getInstanceMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.swizzle_protocolClasses))!
+        let method2: Method = class_getInstanceMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.fakeProcotolClasses))!
 
         method_exchangeImplementations(method1, method2)
     }
@@ -35,54 +35,48 @@ extension CustomUrlProtocolRequestInterceptor: RequestInterceptor {
 
 extension URLSessionConfiguration {
     
-    @objc func swizzle_protocolClasses() -> [AnyClass]? {
-        
-        var originalProtocolClasses = self.swizzle_protocolClasses()
-        if let doesContain = originalProtocolClasses?.contains(where: { protocolClass in
-            return protocolClass == CustormUrlProtocol.self
-        }), !doesContain {
-            originalProtocolClasses?.insert(CustormUrlProtocol.self, at: 0)
+    @objc func fakeProcotolClasses() -> [AnyClass]? {
+        guard let fakeProcotolClasses = self.fakeProcotolClasses() else {
+            return []
         }
+        var originalProtocolClasses = fakeProcotolClasses.filter {
+            return $0 != CustomUrlProtocol.self
+        }
+        originalProtocolClasses.insert(CustomUrlProtocol.self, at: 0)
         return originalProtocolClasses
     }
     
 }
 
-class CustormUrlProtocol: URLProtocol {
+class CustomUrlProtocol: URLProtocol {
     
     var connection: NSURLConnection?
     var response: URLResponse?
     var data: NSMutableData?
     
-    
-    static var requestCount = 0
-    
     open override class func canInit(with request: URLRequest) -> Bool {
-        
         guard let url = request.url, let scheme = url.scheme else {
             return false
         }
         guard ["http", "https"].contains(scheme) else {
             return false
         }
-        if let _ = URLProtocol.property(forKey: "CustormUrlProtocol", in: request) {
+        if let httpHeaders = request.allHTTPHeaderFields, httpHeaders.isEmpty {
             return false
         }
-        
+        if let _ = URLProtocol.property(forKey: "CustomUrlProtocol", in: request) {
+            return false
+        }
         if NetworkInterceptor.shared.shouldIgnoreLogging(url: url){
             return false
         }
-        
-        requestCount = requestCount + 1
-        NSLog("Request #\(requestCount): CURL => \(request.cURL)")
         NetworkInterceptor.shared.logRequest(urlRequest: request)
-        
         return false
     }
-    
+
     open override class func canonicalRequest(for request: URLRequest) -> URLRequest {
         let mutableRequest: NSMutableURLRequest = (request as NSURLRequest).mutableCopy() as! NSMutableURLRequest
-        URLProtocol.setProperty("YES", forKey: "CustormUrlProtocol", in: mutableRequest)
+        URLProtocol.setProperty("YES", forKey: "CustomUrlProtocol", in: mutableRequest)
         return mutableRequest.copy() as! URLRequest
     }
     
@@ -99,7 +93,7 @@ class CustormUrlProtocol: URLProtocol {
     
 }
 
-extension CustormUrlProtocol: NSURLConnectionDelegate {
+extension CustomUrlProtocol: NSURLConnectionDelegate {
     
     public func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
         self.client?.urlProtocol(self, didFailWithError: error)
@@ -120,7 +114,7 @@ extension CustormUrlProtocol: NSURLConnectionDelegate {
     
 }
 
-extension CustormUrlProtocol: NSURLConnectionDataDelegate {
+extension CustomUrlProtocol: NSURLConnectionDataDelegate {
     
     
     public func connection(_ connection: NSURLConnection, willSend request: URLRequest, redirectResponse response: URLResponse?) -> URLRequest? {

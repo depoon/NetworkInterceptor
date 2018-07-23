@@ -10,9 +10,15 @@ import Foundation
 
 public class SlackRequestLogger: RequestLogger {
     
-    let slackToken = "<< YOUR SLACK TOKEN >>"
-    let channel = "<< YOUR SLACK CHANNEL ID>>"
-    let username = "NetworkInterceptor"
+    let slackToken: String
+    let channel: String
+    let username: String
+    
+    init(slackToken: String, channel: String, username: String){
+        self.slackToken = slackToken
+        self.channel = channel
+        self.username = username
+    }
     
     public func excludedDomain() -> [String]{
         return ["slack.com"]
