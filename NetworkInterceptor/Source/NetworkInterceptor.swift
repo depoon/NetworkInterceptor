@@ -39,8 +39,8 @@ public protocol RequestLogger {
     
     public func setupLoggers(config: NetworkInterceptorConfig){
         loggers.removeAll()
-        for registrable in config.registrables {
-            loggers.append(registrable.logger())
+        for requestLogger in config.requestLoggers {
+            loggers.append(requestLogger)
         }
     }
     

@@ -15,7 +15,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let networkConfig = NetworkInterceptorConfig(registrables: [.console])
+        let networkConfig = NetworkInterceptorConfig(requestLoggers: [
+            RequestLoggerRegistrable.console.logger()
+        ])
         
         NetworkInterceptor.shared.setupLoggers(config: networkConfig)
         self.session = URLSession(configuration: URLSessionConfiguration.default)
