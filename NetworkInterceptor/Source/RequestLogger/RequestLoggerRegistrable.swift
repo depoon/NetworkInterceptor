@@ -12,7 +12,7 @@ public enum RequestLoggerRegistrable {
     case console
     case slack(slackToken: String, channel: String, username: String)
     
-    func logger() -> RequestLogger {
+    public func logger() -> RequestLogger {
         switch self {
         case .console:
             return ConsoleRequestLogger()
