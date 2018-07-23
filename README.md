@@ -46,8 +46,8 @@ let networkConfig = NetworkInterceptorConfig(requestLoggers: [
 ```       
 
 ### If you want to use this framework in iOS Device apps you do not own
-- Create a new Dynamic Framework Project and use **NetworkInterceptor** pod. We will 
-- Use Objective C to load code into memory
+- Create a new Dynamic Framework Project and use **NetworkInterceptor** pod. We will only use this framework to start NetworkInterceptor recording.
+- Use Objective C to load code into memory. Refer to the example project in this repository.
 ```swift
 static void __attribute__((constructor)) initialize(void)
 ```
