@@ -25,6 +25,8 @@ Initiates the code injection process
 - Creates a cURL command for a URLRequest and sends to a designated [Slack](https://slack.com) channel
 - You are required to provide your own Slack Authentication Token and slack channel ID for this to work.
 
+You can also create and use multiple implementations of interceptors and loggers by conforming to RequestInterceptor/RequestLogger protocols
+
 ### How to use NetworkInterceptor
 
 Setting up local console logging
@@ -41,13 +43,7 @@ let networkConfig = NetworkInterceptorConfig(requestLoggers: [
   RequestLoggerRegistrable.console.logger(),
   RequestLoggerRegistrable.slack(slackToken: "XXX", channel: "YYY", username: "ZZZ").logger()
 ])
-```        
-
-## How this repository works
-- The build output of this Xcode Project is a dynamic framework, **NetworkInterceptor.framework**.
-- In order to view the requests of an app, the framework needs to be correctly packaged into the app.
-- Out of the box, you will need to provide your own Slack Authentication Token and slack channel ID to use SlackRequestLogger
-- You can also create and use multiple implementations of interceptors and loggers by conforming to RequestInterceptor/RequestLogger protocols and initializing appropriately in the constructor of [NetworkInterceptor](https://github.com/depoon/NetworkInterceptor/blob/785766fbfdd5dd328630626b4fb6e61c1bc88710/NetworkInterceptor/Source/NetworkInterceptor.swift#L36-L37)
+```       
 
 ### If you want to use this framework in iOS Device apps you do not own
 - Create a new Dynamic Framework Project and use **NetworkInterceptor** pod. We will 
