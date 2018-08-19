@@ -79,27 +79,27 @@
 				1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */,
 				1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */,
 				1C2E2F7421062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift */,
-				1C831DC720B9A6DF003648C6 /* InterceptedRequestInterceptor */,
-				1C831DCC20B9A9D2003648C6 /* RequestHandler */,
+				1C831DC720B9A6DF003648C6 /* RequestInterceptor */,
+				1C831DCC20B9A9D2003648C6 /* InterceptedRequestHandler */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		1C831DC720B9A6DF003648C6 /* InterceptedRequestInterceptor */ = {
+		1C831DC720B9A6DF003648C6 /* RequestInterceptor */ = {
 			isa = PBXGroup;
 			children = (
 				1C36592E2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift */,
 			);
-			path = InterceptedRequestInterceptor;
+			path = RequestInterceptor;
 			sourceTree = "<group>";
 		};
-		1C831DCC20B9A9D2003648C6 /* RequestHandler */ = {
+		1C831DCC20B9A9D2003648C6 /* InterceptedRequestHandler */ = {
 			isa = PBXGroup;
 			children = (
 				1C831DCD20B9AA03003648C6 /* SlackRequestHandler.swift */,
 				1C2E2F2920F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift */,
 			);
-			path = RequestHandler;
+			path = InterceptedRequestHandler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
