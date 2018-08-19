@@ -8,26 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		1C2E2F2820F4783C003CFD58 /* NetworkInterceptorConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E2F2720F4783C003CFD58 /* NetworkInterceptorConfig.swift */; };
-		1C2E2F2A20F47B2E003CFD58 /* ConsoleRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E2F2920F47B2E003CFD58 /* ConsoleRequestLogger.swift */; };
-		1C2E2F7521062A79003CFD58 /* RequestLoggerRegistrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E2F7421062A79003CFD58 /* RequestLoggerRegistrable.swift */; };
+		1C2E2F2A20F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E2F2920F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift */; };
+		1C2E2F7521062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E2F7421062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift */; };
+		1C36592F2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C36592E2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift */; };
+		1C3659312129D26A0040A19B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1C3659302129D26A0040A19B /* README.md */; };
 		1C831DBC20B9A3AE003648C6 /* NetworkInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C831DBA20B9A3AE003648C6 /* NetworkInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C831DC620B9A420003648C6 /* NetworkInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */; };
-		1C831DC920B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC820B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift */; };
+		1C831DC920B9A706003648C6 /* NetworkRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */; };
 		1C831DCB20B9A7A7003648C6 /* URLRequest+cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */; };
-		1C831DCE20B9AA03003648C6 /* SlackRequestLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DCD20B9AA03003648C6 /* SlackRequestLogger.swift */; };
+		1C831DCE20B9AA03003648C6 /* SlackRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DCD20B9AA03003648C6 /* SlackRequestHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1C2E2F2720F4783C003CFD58 /* NetworkInterceptorConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptorConfig.swift; sourceTree = "<group>"; };
-		1C2E2F2920F47B2E003CFD58 /* ConsoleRequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleRequestLogger.swift; sourceTree = "<group>"; };
-		1C2E2F7421062A79003CFD58 /* RequestLoggerRegistrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestLoggerRegistrable.swift; sourceTree = "<group>"; };
+		1C2E2F2920F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsoleLoggerRequestHandler.swift; sourceTree = "<group>"; };
+		1C2E2F7421062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterceptedRequestHandlerRegistrable.swift; sourceTree = "<group>"; };
+		1C36592E2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyHttpRequestInterceptor.swift; sourceTree = "<group>"; };
+		1C3659302129D26A0040A19B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		1C831DB720B9A3AE003648C6 /* NetworkInterceptor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkInterceptor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1C831DBA20B9A3AE003648C6 /* NetworkInterceptor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkInterceptor.h; sourceTree = "<group>"; };
 		1C831DBB20B9A3AE003648C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptor.swift; sourceTree = "<group>"; };
-		1C831DC820B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUrlProtocolRequestInterceptor.swift; sourceTree = "<group>"; };
+		1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestInterceptor.swift; sourceTree = "<group>"; };
 		1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+cURL.swift"; sourceTree = "<group>"; };
-		1C831DCD20B9AA03003648C6 /* SlackRequestLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackRequestLogger.swift; sourceTree = "<group>"; };
+		1C831DCD20B9AA03003648C6 /* SlackRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackRequestHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,7 @@
 		1C831DAD20B9A3AE003648C6 = {
 			isa = PBXGroup;
 			children = (
+				1C3659302129D26A0040A19B /* README.md */,
 				1C831DB920B9A3AE003648C6 /* NetworkInterceptor */,
 				1C831DB820B9A3AE003648C6 /* Products */,
 			);
@@ -72,9 +77,11 @@
 			children = (
 				1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */,
 				1C2E2F2720F4783C003CFD58 /* NetworkInterceptorConfig.swift */,
+				1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */,
 				1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */,
+				1C2E2F7421062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift */,
 				1C831DC720B9A6DF003648C6 /* RequestInterceptor */,
-				1C831DCC20B9A9D2003648C6 /* RequestLogger */,
+				1C831DCC20B9A9D2003648C6 /* RequestHandler */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -82,19 +89,18 @@
 		1C831DC720B9A6DF003648C6 /* RequestInterceptor */ = {
 			isa = PBXGroup;
 			children = (
-				1C831DC820B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift */,
+				1C36592E2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift */,
 			);
 			path = RequestInterceptor;
 			sourceTree = "<group>";
 		};
-		1C831DCC20B9A9D2003648C6 /* RequestLogger */ = {
+		1C831DCC20B9A9D2003648C6 /* RequestHandler */ = {
 			isa = PBXGroup;
 			children = (
-				1C831DCD20B9AA03003648C6 /* SlackRequestLogger.swift */,
-				1C2E2F2920F47B2E003CFD58 /* ConsoleRequestLogger.swift */,
-				1C2E2F7421062A79003CFD58 /* RequestLoggerRegistrable.swift */,
+				1C831DCD20B9AA03003648C6 /* SlackRequestHandler.swift */,
+				1C2E2F2920F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift */,
 			);
-			path = RequestLogger;
+			path = RequestHandler;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +172,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C3659312129D26A0040A19B /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,13 +183,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C2E2F7521062A79003CFD58 /* RequestLoggerRegistrable.swift in Sources */,
+				1C2E2F7521062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift in Sources */,
 				1C831DC620B9A420003648C6 /* NetworkInterceptor.swift in Sources */,
+				1C36592F2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift in Sources */,
 				1C831DCB20B9A7A7003648C6 /* URLRequest+cURL.swift in Sources */,
 				1C2E2F2820F4783C003CFD58 /* NetworkInterceptorConfig.swift in Sources */,
-				1C831DC920B9A706003648C6 /* CustomUrlProtocolRequestInterceptor.swift in Sources */,
-				1C2E2F2A20F47B2E003CFD58 /* ConsoleRequestLogger.swift in Sources */,
-				1C831DCE20B9AA03003648C6 /* SlackRequestLogger.swift in Sources */,
+				1C831DC920B9A706003648C6 /* NetworkRequestInterceptor.swift in Sources */,
+				1C2E2F2A20F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift in Sources */,
+				1C831DCE20B9AA03003648C6 /* SlackRequestHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

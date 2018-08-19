@@ -13,59 +13,60 @@ protocol RequestRefirer {
 }
 
 public protocol RequestInterceptor: class {
-    func startRecording()
-    func stopRecording()
+    func canInterceptRequest(urlRequest: URLRequest) -> Bool
 }
 
-public protocol RequestLogger {
-    func excludedDomain() -> [String]
-    func logRequest(urlRequest: URLRequest)
+public protocol InterceptedRequestHandler {
+    func handleRequest(urlRequest: URLRequest)
 }
 
-
+public struct Interceptor {
+    public let requestInterceptor: RequestInterceptor
+    public let handlers: [InterceptedRequestHandler]
+    public init(requestInterceptor: RequestInterceptor, handlers: [InterceptedRequestHandler]) {
+        self.requestInterceptor = requestInterceptor
+        self.handlers = handlers
+    }
+}
 
 @objc public class NetworkInterceptor: NSObject {
     
     @objc public static let shared = NetworkInterceptor()
+    let networkRequestInterceptor = NetworkRequestInterceptor()
+    var config: NetworkInterceptorConfig?
     
-    var loggers: [RequestLogger]
-    var interceptors: [RequestInterceptor]
-    
-    
-    private override init(){        
-        interceptors = [ CustomUrlProtocolRequestInterceptor() ]
-        loggers = [RequestLogger]()
+    public func setup(config: NetworkInterceptorConfig){
+        self.config = config
     }
     
-    public func setupLoggers(config: NetworkInterceptorConfig){
-        loggers.removeAll()
-        for requestLogger in config.requestLoggers {
-            loggers.append(requestLogger)
-        }
-    }
-    
-}
-
-extension NetworkInterceptor: RequestInterceptor {
     @objc public func startRecording(){
-        for interceptor in interceptors {
-            NSLog("** NetworkInterceptor: \(interceptor.self) startRecording")
-            interceptor.startRecording()
-        }
+        self.networkRequestInterceptor.startRecording()
     }
     
     @objc public func stopRecording(){
-        for interceptor in interceptors {
-            interceptor.stopRecording()
+        self.networkRequestInterceptor.stopRecording()
+    }
+    
+    func interceptRequest(urlRequest: URLRequest){
+        guard let config = self.config else {
+            return
+        }
+        for interceptor in config.interceptors {
+            if interceptor.requestInterceptor.canInterceptRequest(urlRequest: urlRequest) {
+                for handler in interceptor.handlers {
+                    handler.handleRequest(urlRequest: urlRequest)
+                }
+            }
         }
     }
+    
 }
-
 
 extension NetworkInterceptor: RequestRefirer {
     func refireUrlRequest(urlRequest: URLRequest) {
-        
-        let task = URLSession.shared.dataTask(with: urlRequest as URLRequest) { (data: Data?, response: URLResponse?, error: Error?) in
+        var request = urlRequest
+        request.addValue("true", forHTTPHeaderField: "Refired")
+        let task = URLSession.shared.dataTask(with: request as URLRequest) { (data: Data?, response: URLResponse?, error: Error?) in
             do {
                 _ = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! [String:Any]
             } catch _ as NSError {
@@ -76,33 +77,5 @@ extension NetworkInterceptor: RequestRefirer {
         }
         task.resume()
         
-    }
-    
-    
-}
-
-extension NetworkInterceptor {
-    
-    func shouldIgnoreLogging(url: URL) -> Bool {
-        var excludedDomains = [String]()
-        for logger in self.loggers {
-            excludedDomains.append(contentsOf: logger.excludedDomain())
-        }
-        
-        if let host = url.host {
-            for excludedDomain in excludedDomains {
-                if host.range(of: excludedDomain) != nil {
-                    return true
-                }
-            }
-        }
-        return false
-        
-    }
-    
-    func logRequest(urlRequest: URLRequest){
-        for logger in self.loggers {
-            logger.logRequest(urlRequest: urlRequest)
-        }
     }
 }

@@ -9,9 +9,9 @@
 import Foundation
 
 public struct NetworkInterceptorConfig {
-    var requestLoggers: [RequestLogger]
+    let interceptors: [Interceptor]
     
-    public init(requestLoggers: [RequestLogger]){
-        self.requestLoggers = requestLoggers
+    public init(interceptors: [Interceptor]){
+        self.interceptors = interceptors
     }
 }

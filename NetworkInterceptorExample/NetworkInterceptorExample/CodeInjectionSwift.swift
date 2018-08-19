@@ -15,10 +15,10 @@ import NetworkInterceptor
     override private init(){}
     
     @objc func performTask(){
-        let networkConfig = NetworkInterceptorConfig(requestLoggers: [
-            RequestLoggerRegistrable.console.logger()
+        let networkConfig = NetworkInterceptorConfig(interceptors: [
+            Interceptor(requestInterceptor: AnyHttpRequestInterceptor(), handlers: [InterceptedRequestHandlerRegistrable.console(logginMode: .nslog).requestHandler()])
         ])
-        NetworkInterceptor.shared.setupLoggers(config: networkConfig)
+        NetworkInterceptor.shared.setup(config: networkConfig)
         NetworkInterceptor.shared.startRecording()
     }
 }
