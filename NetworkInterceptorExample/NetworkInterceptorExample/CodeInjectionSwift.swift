@@ -17,8 +17,7 @@ import NetworkInterceptor
     @objc func performTask(){
         let networkConfig = NetworkInterceptorConfig(interceptors: [
             Interceptor(requestInterceptor: AnyHttpRequestInterceptor(), handlers: [
-                InterceptedRequestHandlerRegistrable.console(logginMode: .nslog).requestHandler(),
-                InterceptedRequestHandlerRegistrable.slack(slackToken: "Token", channel: "Channel", username: "username").requestHandler()
+                InterceptedRequestHandlerRegistrable.console(logginMode: .nslog).requestHandler()
             ])
         ])
         NetworkInterceptor.shared.setup(config: networkConfig)
