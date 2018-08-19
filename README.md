@@ -7,43 +7,54 @@ Simple framework to demo how we can inject URLRequest intercepting codes into iO
 
 NetworkInterceptor is available through CocoaPods. To install it, simply add the following line to your Podfile:
 ```ruby
-pod 'NetworkInterceptor', :git => 'https://github.com/depoon/NetworkInterceptor.git', :tag => '0.0.1'
+pod 'NetworkInterceptor', :git => 'https://github.com/depoon/NetworkInterceptor.git', :tag => '0.0.2'
 ```
 
 ## Main Components
-- [NetworkInterceptorCodeInjection.m](https://github.com/depoon/NetworkInterceptor/blob/689ab2e9053409ede08459fed73c45d95078dc7a/NetworkInterceptor/Source/NetworkInterceptorCodeInjection.m)
-Initiates the code injection process
-- [NetworkInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptor.swift#L27) Main class that manages the URLRequest interception process as well as the logging process
-- [RequestInterceptor](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptor.swift#L15) Protocol for classes that intercepts URLRequest
-- [RequestLogger](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptor.swift#L20) Protocol for classes that log the intercepted URLRequest
+- [NetworkInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptor.swift#L32) Main class that manages the URLRequest interception process.
+- [RequestInterceptor](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptor.swift#L15) Protocol for classes to determine whether a URLRequest can be intercepted
+- [InterceptedRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptor.swift#L19) Protocol for classes to handle intercepted URLRequest
+- [Interceptor](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptor.swift#L23) Struct that defines the RequestInterceptor and corresponding InterceptedRequestHandlers used.
+- [NetworkInterceptorConfig](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/NetworkInterceptorConfig.swift#L11) Struct that defines the config object used to setup the Interception process
 
-### Implementation of RequestInterceptor
-[CustormUrlProtocolRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/CustormUrlProtocolRequestInterceptor.swift)
-- Creates its own implementation of URLProtocol and uses method swizzling to add its class into **procotolClasses**
-### Implementation of RequestLogger
-[SlackRequestLogger](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestLogger/SlackRequestLogger.swift)
-- Creates a cURL command for a URLRequest and sends to a designated [Slack](https://slack.com) channel
-- You are required to provide your own Slack Authentication Token and slack channel ID for this to work.
-
-You can also create and use multiple implementations of interceptors and loggers by conforming to RequestInterceptor/RequestLogger protocols
 
 ### How to use NetworkInterceptor
 
 Setting up local console logging
 ```swift
-let networkConfig = NetworkInterceptorConfig(requestLoggers: [
-  RequestLoggerRegistrable.console.logger()
+@import NetworkInterceptor
+
+let networkConfig = NetworkInterceptorConfig(interceptors: [
+    Interceptor(requestInterceptor: AnyHttpRequestInterceptor(), handlers: [
+        InterceptedRequestHandlerRegistrable.console(logginMode: .nslog).requestHandler()
+    ])
 ])
-NetworkInterceptor.shared.setupLoggers(config: networkConfig)
+NetworkInterceptor.shared.setup(config: networkConfig)
 NetworkInterceptor.shared.startRecording()
 ```
 To use multiple loggers, eg Locale Console and Slack Loggers
 ```swift
-let networkConfig = NetworkInterceptorConfig(requestLoggers: [
-  RequestLoggerRegistrable.console.logger(),
-  RequestLoggerRegistrable.slack(slackToken: "XXX", channel: "YYY", username: "ZZZ").logger()
+let networkConfig = NetworkInterceptorConfig(interceptors: [
+    Interceptor(requestInterceptor: AnyHttpRequestInterceptor(), handlers: [
+        InterceptedRequestHandlerRegistrable.console(logginMode: .nslog).requestHandler(),
+        InterceptedRequestHandlerRegistrable.slack(slackToken: "Token", channel: "Channel", username: "username").requestHandler()
+    ])
 ])
 ```       
+
+### RequestInterceptors available 
+[AnyHttpRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/AnyHttpRequestInterceptor.swift) Intercepts all http and https requests
+
+### InterceptedRequestHandler available
+[AnyHttpRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/AnyHttpRequestInterceptor.swift) Intercepts all http and https requests
+
+- Creates its own implementation of URLProtocol and uses method swizzling to add its class into **procotolClasses**
+### Implementation of RequestLogger
+[ConsoleLoggerRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/InterceptedRequestHandler/ConsoleLoggerRequestHandler.swift) Prints request in cURL format to the console
+[SlackRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/InterceptedRequestHandler/SlackRequestHandler.swift) Sends the request in cURL format to a designated [Slack](https://slack.com) channel. You are required to provide your own Slack Authentication Token and slack channel ID for this to work.
+
+#### You can also create and use multiple implementations of interceptors and loggers by conforming to RequestInterceptor/InterceptedRequestHandler protocols
+
 
 ### If you want to use this framework in iOS Device apps you do not own
 - Create a new Dynamic Framework Project and use **NetworkInterceptor** pod. We will only use this framework to start NetworkInterceptor recording.
