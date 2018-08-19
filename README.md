@@ -42,11 +42,11 @@ let networkConfig = NetworkInterceptorConfig(interceptors: [
 ])
 ```       
 
-### InterceptedRequestHandler available
+### RequestInterceptor available
 
 [AnyHttpRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/AnyHttpRequestInterceptor.swift) Intercepts all http and https requests
 
-### Implementation of RequestLogger
+### InterceptedRequestHandler available
 
 [ConsoleLoggerRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/InterceptedRequestHandler/ConsoleLoggerRequestHandler.swift) Prints request in cURL format to the console
 
