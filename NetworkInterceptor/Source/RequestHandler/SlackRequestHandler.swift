@@ -1,5 +1,5 @@
 //
-//  SlackRequestLogger.swift
+//  SlackRequestHandler.swift
 //  NetworkInterceptor
 //
 //  Created by Kenneth Poon on 26/5/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SlackRequestLogger: RequestLogger {
+public class SlackRequestHandler: InterceptedRequestHandler {
     
     let slackToken: String
     let channel: String
@@ -20,19 +20,12 @@ public class SlackRequestLogger: RequestLogger {
         self.username = username
     }
     
-    public func excludedDomain() -> [String]{
-        return ["slack.com"]
-    }
-    
-    public func logRequest(urlRequest: URLRequest) {
+    public func handleRequest(urlRequest: URLRequest) {
         NetworkInterceptor.shared.refireUrlRequest(urlRequest: self.generateSlackPayloadFromRequest(originalRequest: urlRequest))
-        
-        
     }
-    
 }
 
-extension SlackRequestLogger {
+extension SlackRequestHandler {
     
     fileprivate func generateSlackForwardingRequest() -> NSMutableURLRequest{
         let request = NSMutableURLRequest()

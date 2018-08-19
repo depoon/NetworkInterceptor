@@ -15,11 +15,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let networkConfig = NetworkInterceptorConfig(requestLoggers: [
-            RequestLoggerRegistrable.console.logger()
-        ])
-        
-        NetworkInterceptor.shared.setupLoggers(config: networkConfig)
         self.session = URLSession(configuration: URLSessionConfiguration.default)
         
         if let url = URL(string: "https://www.antennahouse.com/XSLsample/pdf/sample-link_1.pdf") {
