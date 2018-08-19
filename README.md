@@ -42,15 +42,14 @@ let networkConfig = NetworkInterceptorConfig(interceptors: [
 ])
 ```       
 
-### RequestInterceptors available 
-[AnyHttpRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/AnyHttpRequestInterceptor.swift) Intercepts all http and https requests
-
 ### InterceptedRequestHandler available
+
 [AnyHttpRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/AnyHttpRequestInterceptor.swift) Intercepts all http and https requests
 
-- Creates its own implementation of URLProtocol and uses method swizzling to add its class into **procotolClasses**
 ### Implementation of RequestLogger
+
 [ConsoleLoggerRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/InterceptedRequestHandler/ConsoleLoggerRequestHandler.swift) Prints request in cURL format to the console
+
 [SlackRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/InterceptedRequestHandler/SlackRequestHandler.swift) Sends the request in cURL format to a designated [Slack](https://slack.com) channel. You are required to provide your own Slack Authentication Token and slack channel ID for this to work.
 
 #### You can also create and use multiple implementations of interceptors and loggers by conforming to RequestInterceptor/InterceptedRequestHandler protocols
