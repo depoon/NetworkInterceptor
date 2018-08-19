@@ -1,5 +1,5 @@
 # NetworkInterceptor
-Simple framework to demo how we can inject URLRequest intercepting codes into iOS Apps (even for non-jailbroken devices). This framework allows you to inspect the details of all outgoing requests from the app. This includes requests sent out by 3rd party framework like FacebookSDK, Google Analytics, etc
+Simple framework to demo how we can intercept URLRequestin iOS Apps. This framework allows you to inspect the details of all outgoing requests from the app. This includes requests sent out by 3rd party framework like FacebookSDK, Google Analytics, etc. It is possible to use this framework to inspect and intercept App Store apps even on non-jailbroken devices.
 
 ### Installation
 
@@ -42,15 +42,14 @@ let networkConfig = NetworkInterceptorConfig(interceptors: [
 ])
 ```       
 
-### RequestInterceptors available 
-[AnyHttpRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/AnyHttpRequestInterceptor.swift) Intercepts all http and https requests
-
 ### InterceptedRequestHandler available
+
 [AnyHttpRequestInterceptor.swift](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/RequestInterceptor/AnyHttpRequestInterceptor.swift) Intercepts all http and https requests
 
-- Creates its own implementation of URLProtocol and uses method swizzling to add its class into **procotolClasses**
 ### Implementation of RequestLogger
+
 [ConsoleLoggerRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/InterceptedRequestHandler/ConsoleLoggerRequestHandler.swift) Prints request in cURL format to the console
+
 [SlackRequestHandler](https://github.com/depoon/NetworkInterceptor/blob/master/NetworkInterceptor/Source/InterceptedRequestHandler/SlackRequestHandler.swift) Sends the request in cURL format to a designated [Slack](https://slack.com) channel. You are required to provide your own Slack Authentication Token and slack channel ID for this to work.
 
 #### You can also create and use multiple implementations of interceptors and loggers by conforming to RequestInterceptor/InterceptedRequestHandler protocols
