@@ -11,7 +11,6 @@
 		1C2E2F2A20F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E2F2920F47B2E003CFD58 /* ConsoleLoggerRequestHandler.swift */; };
 		1C2E2F7521062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C2E2F7421062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift */; };
 		1C36592F2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C36592E2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift */; };
-		1C3659312129D26A0040A19B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1C3659302129D26A0040A19B /* README.md */; };
 		1C831DBC20B9A3AE003648C6 /* NetworkInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C831DBA20B9A3AE003648C6 /* NetworkInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C831DC620B9A420003648C6 /* NetworkInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */; };
 		1C831DC920B9A706003648C6 /* NetworkRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */; };
@@ -80,18 +79,18 @@
 				1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */,
 				1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */,
 				1C2E2F7421062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift */,
-				1C831DC720B9A6DF003648C6 /* RequestInterceptor */,
+				1C831DC720B9A6DF003648C6 /* InterceptedRequestInterceptor */,
 				1C831DCC20B9A9D2003648C6 /* RequestHandler */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		1C831DC720B9A6DF003648C6 /* RequestInterceptor */ = {
+		1C831DC720B9A6DF003648C6 /* InterceptedRequestInterceptor */ = {
 			isa = PBXGroup;
 			children = (
 				1C36592E2129CE1D0040A19B /* AnyHttpRequestInterceptor.swift */,
 			);
-			path = RequestInterceptor;
+			path = InterceptedRequestInterceptor;
 			sourceTree = "<group>";
 		};
 		1C831DCC20B9A9D2003648C6 /* RequestHandler */ = {
@@ -172,7 +171,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C3659312129D26A0040A19B /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
