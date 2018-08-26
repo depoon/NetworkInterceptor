@@ -7,7 +7,7 @@ Simple framework to demo how we can intercept URLRequest in iOS Apps. This frame
 
 NetworkInterceptor is available through CocoaPods. To install it, simply add the following line to your Podfile:
 ```ruby
-pod 'NetworkInterceptor', :git => 'https://github.com/depoon/NetworkInterceptor.git', :tag => '0.0.3'
+pod 'NetworkInterceptor', :git => 'https://github.com/depoon/NetworkInterceptor.git', :tag => '0.0.4'
 ```
 
 ## Main Components
