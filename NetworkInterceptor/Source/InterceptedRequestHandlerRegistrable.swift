@@ -8,16 +8,19 @@
 
 import Foundation
 
-public enum InterceptedRequestHandlerRegistrable {
+public enum SniffableRequestHandlerRegistrable {
     case console(logginMode: ConsoleLoggingMode)
     case slack(slackToken: String, channel: String, username: String)
+    case alternateDomain(domainURL: URL)
     
-    public func requestHandler() -> InterceptedRequestHandler {
+    public func requestHandler() -> SniffableRequestHandler {
         switch self {
         case .console(let loggingMode):
-            return ConsoleLoggerRequestHandler(loggingMode: loggingMode)
+            return ConsoleLoggerSniffableRequestHandler(loggingMode: loggingMode)
         case .slack(let slackToken, let channel, let username):
-            return SlackRequestHandler(slackToken: slackToken, channel: channel, username: username)
+            return SlackSniffableRequestHandler(slackToken: slackToken, channel: channel, username: username)
+        case .alternateDomain(let domainURL):
+            return AlternateDomainSniffableRequestHandler(domainURL: domainURL)
         }
     }
 }

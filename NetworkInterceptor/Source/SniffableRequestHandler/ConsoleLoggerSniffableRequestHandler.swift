@@ -1,5 +1,5 @@
 //
-//  ConsoleLoggerRequestHandler.swift
+//  ConsoleLoggerSniffableRequestHandler.swift
 //  NetworkInterceptor
 //
 //  Created by Kenneth Poon on 10/7/18.
@@ -12,7 +12,7 @@ public enum ConsoleLoggingMode {
     case print, nslog
 }
 
-public class ConsoleLoggerRequestHandler: InterceptedRequestHandler {
+public class ConsoleLoggerSniffableRequestHandler: SniffableRequestHandler {
     
     let loggingMode: ConsoleLoggingMode
     public init(loggingMode: ConsoleLoggingMode){
@@ -20,7 +20,7 @@ public class ConsoleLoggerRequestHandler: InterceptedRequestHandler {
     }
     
     fileprivate var requestCount: Int = 0
-    public func handleRequest(urlRequest: URLRequest) {
+    public func sniffRequest(urlRequest: URLRequest) {
         requestCount = requestCount + 1
         let loggableText = "Request #\(requestCount): CURL => \(urlRequest.cURL)"
         switch self.loggingMode {

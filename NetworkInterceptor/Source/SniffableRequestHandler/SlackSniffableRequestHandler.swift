@@ -1,5 +1,5 @@
 //
-//  SlackRequestHandler.swift
+//  SlackSniffableRequestHandler.swift
 //  NetworkInterceptor
 //
 //  Created by Kenneth Poon on 26/5/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SlackRequestHandler: InterceptedRequestHandler {
+public class SlackSniffableRequestHandler: SniffableRequestHandler {
     
     let slackToken: String
     let channel: String
@@ -20,12 +20,12 @@ public class SlackRequestHandler: InterceptedRequestHandler {
         self.username = username
     }
     
-    public func handleRequest(urlRequest: URLRequest) {
-        NetworkInterceptor.shared.refireUrlRequest(urlRequest: self.generateSlackPayloadFromRequest(originalRequest: urlRequest))
+    public func sniffRequest(urlRequest: URLRequest) {
+        NetworkInterceptor.shared.refireURLRequest(urlRequest: self.generateSlackPayloadFromRequest(originalRequest: urlRequest))
     }
 }
 
-extension SlackRequestHandler {
+extension SlackSniffableRequestHandler {
     
     fileprivate func generateSlackForwardingRequest() -> NSMutableURLRequest{
         let request = NSMutableURLRequest()

@@ -15,11 +15,18 @@ import NetworkInterceptor
     override private init(){}
     
     @objc func performTask(){
-        let networkConfig = NetworkInterceptorConfig(interceptors: [
-            Interceptor(requestInterceptor: AnyHttpRequestInterceptor(), handlers: [
-                InterceptedRequestHandlerRegistrable.console(logginMode: .nslog).requestHandler()
-            ])
-        ])
+        let requestSniffers: [RequestSniffer] = [
+            RequestSniffer(requestEvaluator: AnyHttpRequestEvaluator(), handlers: [
+                SniffableRequestHandlerRegistrable.console(logginMode: .nslog).requestHandler()
+                ])
+        ]
+
+        let requestRedirectors: [RequestRedirector] = [
+            RequestRedirector(requestEvaluator: DomainHttpRequestEvaluator(domain: "www.antennahouse.com"), redirectableRequestHandler: AlternateUrlRequestRedirector(url: URL(string: "https://www.rhodeshouse.ox.ac.uk/media/1002/sample-pdf-file.pdf")!))
+        ]
+        
+        let networkConfig = NetworkInterceptorConfig(requestSniffers: requestSniffers,
+                                                     requestRedirectors: requestRedirectors)
         NetworkInterceptor.shared.setup(config: networkConfig)
         NetworkInterceptor.shared.startRecording()
     }
