@@ -1,5 +1,5 @@
 //
-//  AnyHttpRequestInterceptor.swift
+//  AnyHttpRequestEvaluator.swift
 //  NetworkInterceptor
 //
 //  Created by Kenneth Poon on 20/8/18.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-public class AnyHttpRequestInterceptor: RequestInterceptor {
+public class AnyHttpRequestEvaluator: RequestEvaluator {
     
     public init(){}
     
-    public func canInterceptRequest(urlRequest: URLRequest) -> Bool {
+    public func isActionAllowed(urlRequest: URLRequest) -> Bool {
         guard let scheme = urlRequest.url?.scheme else {
             return false
         }

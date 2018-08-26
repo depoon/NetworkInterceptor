@@ -9,23 +9,36 @@
 import Foundation
 
 protocol RequestRefirer {
-    func refireUrlRequest(urlRequest: URLRequest)
+    func refireURLRequest(urlRequest: URLRequest)
 }
 
-public protocol RequestInterceptor: class {
-    func canInterceptRequest(urlRequest: URLRequest) -> Bool
+public protocol RequestEvaluator: class {
+    func isActionAllowed(urlRequest: URLRequest) -> Bool
 }
 
-public protocol InterceptedRequestHandler {
-    func handleRequest(urlRequest: URLRequest)
+public protocol SniffableRequestHandler {
+    func sniffRequest(urlRequest: URLRequest)
 }
 
-public struct Interceptor {
-    public let requestInterceptor: RequestInterceptor
-    public let handlers: [InterceptedRequestHandler]
-    public init(requestInterceptor: RequestInterceptor, handlers: [InterceptedRequestHandler]) {
-        self.requestInterceptor = requestInterceptor
+public protocol RedirectableRequestHandler {
+    func redirectedRequest(originalUrlRequest: URLRequest) -> URLRequest
+}
+
+public struct RequestSniffer {
+    public let requestEvaluator: RequestEvaluator
+    public let handlers: [SniffableRequestHandler]
+    public init(requestEvaluator: RequestEvaluator, handlers: [SniffableRequestHandler]) {
+        self.requestEvaluator = requestEvaluator
         self.handlers = handlers
+    }
+}
+
+public struct RequestRedirector {
+    public let requestEvaluator: RequestEvaluator
+    public let redirectableRequestHandler: RedirectableRequestHandler
+    public init(requestEvaluator: RequestEvaluator, redirectableRequestHandler: RedirectableRequestHandler) {
+        self.requestEvaluator = requestEvaluator
+        self.redirectableRequestHandler = redirectableRequestHandler
     }
 }
 
@@ -47,23 +60,47 @@ public struct Interceptor {
         self.networkRequestInterceptor.stopRecording()
     }
     
-    func interceptRequest(urlRequest: URLRequest){
+    func sniffRequest(urlRequest: URLRequest){
         guard let config = self.config else {
             return
         }
-        for interceptor in config.interceptors {
-            if interceptor.requestInterceptor.canInterceptRequest(urlRequest: urlRequest) {
-                for handler in interceptor.handlers {
-                    handler.handleRequest(urlRequest: urlRequest)
+        for sniffer in config.requestSniffers {
+            if sniffer.requestEvaluator.isActionAllowed(urlRequest: urlRequest) {
+                for handler in sniffer.handlers {
+                    handler.sniffRequest(urlRequest: urlRequest)
                 }
             }
         }
     }
     
+    func isRequestRedirectable(urlRequest: URLRequest) -> Bool {
+        guard let config = self.config else {
+            return false
+        }
+        for redirector in config.requestRedirectors {
+            if redirector.requestEvaluator.isActionAllowed(urlRequest: urlRequest) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func redirectedRequest(urlRequest: URLRequest) -> URLRequest? {
+        guard let config = self.config else {
+            return nil
+        }
+        for redirector in config.requestRedirectors {
+            if redirector.requestEvaluator.isActionAllowed(urlRequest: urlRequest) {
+                return redirector.redirectableRequestHandler.redirectedRequest(originalUrlRequest: urlRequest)
+            }
+        }
+        return nil
+    }
+    
 }
 
 extension NetworkInterceptor: RequestRefirer {
-    func refireUrlRequest(urlRequest: URLRequest) {
+    func refireURLRequest(urlRequest: URLRequest) {
         var request = urlRequest
         request.addValue("true", forHTTPHeaderField: "Refired")
         let task = URLSession.shared.dataTask(with: request as URLRequest) { (data: Data?, response: URLResponse?, error: Error?) in
