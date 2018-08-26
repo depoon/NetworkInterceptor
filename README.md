@@ -33,7 +33,7 @@ let requestSniffers: [RequestSniffer] = [
     ])
 ]
 
-let networkConfig = NetworkInterceptorConfig(requestRedirectors: requestRedirectors)
+let networkConfig = NetworkInterceptorConfig(requestSniffers: requestSniffers)
 NetworkInterceptor.shared.setup(config: networkConfig)
 NetworkInterceptor.shared.startRecording()
 ```
