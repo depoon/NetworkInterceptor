@@ -1,4 +1,5 @@
 
 NetworkInterceptor.xcodeproj/project.xcworkspace/xcuserdata/**
 NetworkInterceptorExample/.DS_Store
-NetworkInterceptor.xcworkspace/xcuserdata/**
+*.xcuserdatad
+NetworkInterceptor.xcworkspace/xcuserdata/*.xcuserdatad/**
