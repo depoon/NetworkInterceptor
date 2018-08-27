@@ -17,13 +17,12 @@ public class AlternateDomainRequestRedirector: RedirectableRequestHandler {
     }
     
     public func redirectedRequest(originalUrlRequest: URLRequest) -> URLRequest {
-        let mutableRequest = (originalUrlRequest as NSURLRequest).mutableCopy() as! NSMutableURLRequest
-        var path: String = ""
-        if let originalURL = originalUrlRequest.url {
-            path = originalURL.path
-        }
-        let redirectedURL = URL(string: "\(domainURL.absoluteString)\(path)")!
-        mutableRequest.url = redirectedURL
-        return mutableRequest as URLRequest
+        let redirectedURL = URL(string: "\(self.domainURL.absoluteString)\(originalUrlRequest.url!.path)")
+        var redirectedRequest = URLRequest(url: redirectedURL!)
+        redirectedRequest.httpBody = originalUrlRequest.httpBody
+        redirectedRequest.httpMethod = originalUrlRequest.httpMethod!
+        redirectedRequest.allHTTPHeaderFields = originalUrlRequest.allHTTPHeaderFields
+        redirectedRequest.cachePolicy = originalUrlRequest.cachePolicy
+        return redirectedRequest
     }
 }
