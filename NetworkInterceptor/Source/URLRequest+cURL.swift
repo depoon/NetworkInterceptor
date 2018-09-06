@@ -39,12 +39,21 @@ class RequestCurlCommand{
     }
     
     fileprivate func getHttpBodyString(request: URLRequest) -> String? {
-        
+        if let httpBodyString = self.getHttpBodyStream(request: request) {
+            return httpBodyString
+        }
+        if let httpBodyString = self.getHttpBody(request: request) {
+            return httpBodyString
+        }
+        return nil
+    }
+    
+    fileprivate func getHttpBodyStream(request: URLRequest) -> String? {
         guard let httpBodyStream = request.httpBodyStream else {
             return nil
         }
         let data = NSMutableData()
-        var buffer = [UInt8](repeating: 0, count: 4096)        
+        var buffer = [UInt8](repeating: 0, count: 4096)
         
         httpBodyStream.open()
         while httpBodyStream.hasBytesAvailable {
@@ -56,8 +65,21 @@ class RequestCurlCommand{
             }
         }
         return NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) as String?
-        
     }
     
+    fileprivate func getHttpBody(request: URLRequest) -> String? {
+        guard let httpBody = request.httpBody, httpBody.count > 0 else {
+            return nil
+        }
+        guard let httpBodyString = String(data: httpBody, encoding: String.Encoding.utf8) else {
+            return nil
+        }
+        let escapedHttpBody = self.escapeAllSingleQuotes(httpBodyString)
+        return escapedHttpBody
+    }
+    
+    fileprivate func escapeAllSingleQuotes(_ value: String) -> String {
+        return value.replacingOccurrences(of: "'", with: "'\\''")
+    }
     
 }
