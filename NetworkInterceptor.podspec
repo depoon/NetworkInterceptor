@@ -17,4 +17,5 @@ DESC
   s.requires_arc = true
 
   s.source_files = 'NetworkInterceptor/Source/**/*'
+  s.dependency 'GzipSwift'
 end

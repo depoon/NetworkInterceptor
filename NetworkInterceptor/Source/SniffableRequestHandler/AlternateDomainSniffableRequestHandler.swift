@@ -17,16 +17,7 @@ public class AlternateDomainSniffableRequestHandler: SniffableRequestHandler {
     }
     
     public func sniffRequest(urlRequest: URLRequest) {
-        guard let alternateRequest = (urlRequest as NSURLRequest).mutableCopy() as? NSMutableURLRequest else {
-            return
-        }
-        guard let path = urlRequest.url?.path else {
-            return
-        }
-        guard let alternateURL = URL(string: "\(self.domainURL.absoluteString)\(path)") else {
-            return
-        }
-        alternateRequest.url = alternateURL
+        let alternateRequest = URLRequestFactory().createURLRequest(originalUrlRequest: urlRequest, url: self.domainURL)
         NetworkInterceptor.shared.refireURLRequest(urlRequest: alternateRequest as URLRequest)
     }
     
