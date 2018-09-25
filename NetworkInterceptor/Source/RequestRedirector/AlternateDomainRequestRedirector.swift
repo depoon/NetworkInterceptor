@@ -17,12 +17,20 @@ public class AlternateDomainRequestRedirector: RedirectableRequestHandler {
     }
     
     public func redirectedRequest(originalUrlRequest: URLRequest) -> URLRequest {
-        let redirectedURL = URL(string: "\(self.domainURL.absoluteString)\(originalUrlRequest.url!.path)")
-        var redirectedRequest = URLRequest(url: redirectedURL!)
+        let redirectedURL = self.redirectedUrl(originalUrlRequest: originalUrlRequest)
+        var redirectedRequest = URLRequest(url: redirectedURL)
         redirectedRequest.httpBody = originalUrlRequest.httpBody
         redirectedRequest.httpMethod = originalUrlRequest.httpMethod!
         redirectedRequest.allHTTPHeaderFields = originalUrlRequest.allHTTPHeaderFields
         redirectedRequest.cachePolicy = originalUrlRequest.cachePolicy
         return redirectedRequest
+    }
+    
+    fileprivate func redirectedUrl(originalUrlRequest: URLRequest) -> URL {
+        var redirectedUrlString = "\(self.domainURL.absoluteString)\(originalUrlRequest.url!.path)"
+        if let query = originalUrlRequest.url?.query {
+            redirectedUrlString = "\(redirectedUrlString)?\(query)"
+        }
+        return URL(string: redirectedUrlString)!
     }
 }
