@@ -3,3 +3,4 @@ NetworkInterceptor.xcodeproj/project.xcworkspace/xcuserdata/**
 NetworkInterceptorExample/.DS_Store
 *.xcuserdatad
 NetworkInterceptor.xcworkspace/xcuserdata/*.xcuserdatad/**
+Pods/**

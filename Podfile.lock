@@ -1,0 +1,16 @@
+PODS:
+  - GzipSwift (4.0.4)
+
+DEPENDENCIES:
+  - GzipSwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - GzipSwift
+
+SPEC CHECKSUMS:
+  GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
+
+PODFILE CHECKSUM: 679ee5709329bc77ba5cdfe226c221a12c6d8be9
+
+COCOAPODS: 1.5.3
