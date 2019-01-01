@@ -8,7 +8,7 @@ inhibit_all_warnings!
 
 def pods
     pod 'GzipSwift'
-    pod 'URLRequest-cURL', :git => 'https://github.com/depoon/URLRequest-cURL', :tag => '0.0.1'
+    pod 'URLRequest-cURL'
 end
 
 target 'NetworkInterceptor' do

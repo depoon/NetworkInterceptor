@@ -1,30 +1,21 @@
 PODS:
   - GzipSwift (4.0.4)
-  - URLRequest-cURL (0.0.1):
+  - URLRequest-cURL (0.0.2):
     - GzipSwift
 
 DEPENDENCIES:
   - GzipSwift
-  - URLRequest-cURL (from `https://github.com/depoon/URLRequest-cURL`, tag `0.0.1`)
+  - URLRequest-cURL
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - GzipSwift
-
-EXTERNAL SOURCES:
-  URLRequest-cURL:
-    :git: https://github.com/depoon/URLRequest-cURL
-    :tag: 0.0.1
-
-CHECKOUT OPTIONS:
-  URLRequest-cURL:
-    :git: https://github.com/depoon/URLRequest-cURL
-    :tag: 0.0.1
+    - URLRequest-cURL
 
 SPEC CHECKSUMS:
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
-  URLRequest-cURL: f91f17f3bcecbbfd73794bfebe41b9991053f349
+  URLRequest-cURL: b366c9bb861b6e569c81ff96088cbecacc987ac6
 
-PODFILE CHECKSUM: 04de400b724dd5c236a750f53edb0b82734a5085
+PODFILE CHECKSUM: 705ea690507f6390f795ead03efbad69830e36d4
 
 COCOAPODS: 1.5.3

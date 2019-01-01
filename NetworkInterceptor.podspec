@@ -2,6 +2,7 @@
 Pod::Spec.new do |s|
   s.name             = "NetworkInterceptor"
   s.version          = "0.0.7"
+  s.swift_version    = '4.2'
   s.summary          = "Intercepting Network Requests"
   s.description      = <<-DESC
 Features
@@ -18,4 +19,5 @@ DESC
 
   s.source_files = 'NetworkInterceptor/Source/**/*'
   s.dependency 'GzipSwift'
+  s.dependency 'URLRequest-cURL'
 end
