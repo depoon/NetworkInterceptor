@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import URLRequest_cURL
 
 public enum ConsoleLoggingMode {
     case print, nslog

@@ -16,7 +16,6 @@
 		1C831DBC20B9A3AE003648C6 /* NetworkInterceptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 1C831DBA20B9A3AE003648C6 /* NetworkInterceptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1C831DC620B9A420003648C6 /* NetworkInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */; };
 		1C831DC920B9A706003648C6 /* NetworkRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */; };
-		1C831DCB20B9A7A7003648C6 /* URLRequest+cURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */; };
 		1C831DCE20B9AA03003648C6 /* SlackSniffableRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C831DCD20B9AA03003648C6 /* SlackSniffableRequestHandler.swift */; };
 		1CAD80CC21328D5600CA2160 /* DomainHttpRequestEvaluator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD80CB21328D5600CA2160 /* DomainHttpRequestEvaluator.swift */; };
 		1CAD80CE21328E9400CA2160 /* AlternateDomainSniffableRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD80CD21328E9400CA2160 /* AlternateDomainSniffableRequestHandler.swift */; };
@@ -39,7 +38,6 @@
 		1C831DBB20B9A3AE003648C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1C831DC520B9A420003648C6 /* NetworkInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterceptor.swift; sourceTree = "<group>"; };
 		1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestInterceptor.swift; sourceTree = "<group>"; };
-		1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+cURL.swift"; sourceTree = "<group>"; };
 		1C831DCD20B9AA03003648C6 /* SlackSniffableRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackSniffableRequestHandler.swift; sourceTree = "<group>"; };
 		1CAD80CB21328D5600CA2160 /* DomainHttpRequestEvaluator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainHttpRequestEvaluator.swift; sourceTree = "<group>"; };
 		1CAD80CD21328E9400CA2160 /* AlternateDomainSniffableRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateDomainSniffableRequestHandler.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 				1C2E2F2720F4783C003CFD58 /* NetworkInterceptorConfig.swift */,
 				1C831DC820B9A706003648C6 /* NetworkRequestInterceptor.swift */,
 				1CAD80CF2132947500CA2160 /* NetworkRequestRedirectHandler.swift */,
-				1C831DCA20B9A7A7003648C6 /* URLRequest+cURL.swift */,
 				1C2E2F7421062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift */,
 				1CAD80D321329BCA00CA2160 /* URLProtocol */,
 				1C831DC720B9A6DF003648C6 /* RequestEvaluator */,
@@ -280,7 +277,6 @@
 				1C36592F2129CE1D0040A19B /* AnyHttpRequestEvaluator.swift in Sources */,
 				1CAD80D02132947500CA2160 /* NetworkRequestRedirectHandler.swift in Sources */,
 				1CAD80CE21328E9400CA2160 /* AlternateDomainSniffableRequestHandler.swift in Sources */,
-				1C831DCB20B9A7A7003648C6 /* URLRequest+cURL.swift in Sources */,
 				1C19A2A9216A0D140041F5BE /* URLRequestFactory.swift in Sources */,
 				1CAD80DA2133042400CA2160 /* AlternateUrlRequestRedirector.swift in Sources */,
 				1C2E2F2820F4783C003CFD58 /* NetworkInterceptorConfig.swift in Sources */,
