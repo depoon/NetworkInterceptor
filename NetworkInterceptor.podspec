@@ -14,7 +14,7 @@ DESC
   s.author           = { "depoon" => "de_poon@hotmail.com" }
   s.source           = { :git => "https://github.com/depoon/NetworkInterceptor.git", :tag => s.version.to_s }
 
-  s.platform     = :ios, '9.0'
+  s.platform     = :ios, '10.0'
   s.requires_arc = true
 
   s.source_files = 'NetworkInterceptor/Source/**/*'
