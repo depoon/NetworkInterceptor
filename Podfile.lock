@@ -1,6 +1,6 @@
 PODS:
   - GzipSwift (4.0.4)
-  - URLRequest-cURL (0.0.2):
+  - URLRequest-cURL (0.0.3):
     - GzipSwift
 
 DEPENDENCIES:
@@ -14,7 +14,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   GzipSwift: 1a5bc5f7827e09846b0635b5079f1224bc3b1c3a
-  URLRequest-cURL: b366c9bb861b6e569c81ff96088cbecacc987ac6
+  URLRequest-cURL: b159525e416ead3133ae60450660b8c82d2f2aa0
 
 PODFILE CHECKSUM: 705ea690507f6390f795ead03efbad69830e36d4
 

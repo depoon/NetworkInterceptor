@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "NetworkInterceptor"
-  s.version          = "0.0.7"
+  s.version          = "0.0.8"
   s.swift_version    = '4.2'
   s.summary          = "Intercepting Network Requests"
   s.description      = <<-DESC
