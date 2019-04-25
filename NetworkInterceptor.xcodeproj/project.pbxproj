@@ -24,6 +24,7 @@
 		1CAD80D521329BE900CA2160 /* NetworkRequestSniffableUrlProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD80D421329BE900CA2160 /* NetworkRequestSniffableUrlProtocol.swift */; };
 		1CAD80D82132A7DC00CA2160 /* AlternateDomainRequestRedirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD80D72132A7DC00CA2160 /* AlternateDomainRequestRedirector.swift */; };
 		1CAD80DA2133042400CA2160 /* AlternateUrlRequestRedirector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CAD80D92133042400CA2160 /* AlternateUrlRequestRedirector.swift */; };
+		56F02822227165B400137037 /* SlackHookSniffableRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F02821227165B400137037 /* SlackHookSniffableRequestHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		1CAD80D72132A7DC00CA2160 /* AlternateDomainRequestRedirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateDomainRequestRedirector.swift; sourceTree = "<group>"; };
 		1CAD80D92133042400CA2160 /* AlternateUrlRequestRedirector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternateUrlRequestRedirector.swift; sourceTree = "<group>"; };
 		3C737E0A347E83ED712E90F0 /* Pods_NetworkInterceptor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NetworkInterceptor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56F02821227165B400137037 /* SlackHookSniffableRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackHookSniffableRequestHandler.swift; sourceTree = "<group>"; };
 		7CA727150E0B1AD1D8F1EAED /* Pods-NetworkInterceptor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkInterceptor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NetworkInterceptor/Pods-NetworkInterceptor.debug.xcconfig"; sourceTree = "<group>"; };
 		E75255131FB11CF5B99D8E6F /* Pods-NetworkInterceptor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NetworkInterceptor.release.xcconfig"; path = "Pods/Target Support Files/Pods-NetworkInterceptor/Pods-NetworkInterceptor.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				1C831DCD20B9AA03003648C6 /* SlackSniffableRequestHandler.swift */,
 				1C2E2F2920F47B2E003CFD58 /* ConsoleLoggerSniffableRequestHandler.swift */,
 				1CAD80CD21328E9400CA2160 /* AlternateDomainSniffableRequestHandler.swift */,
+				56F02821227165B400137037 /* SlackHookSniffableRequestHandler.swift */,
 			);
 			path = SniffableRequestHandler;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1C2E2F7521062A79003CFD58 /* InterceptedRequestHandlerRegistrable.swift in Sources */,
+				56F02822227165B400137037 /* SlackHookSniffableRequestHandler.swift in Sources */,
 				1C831DC620B9A420003648C6 /* NetworkInterceptor.swift in Sources */,
 				1C36592F2129CE1D0040A19B /* AnyHttpRequestEvaluator.swift in Sources */,
 				1CAD80D02132947500CA2160 /* NetworkRequestRedirectHandler.swift in Sources */,
