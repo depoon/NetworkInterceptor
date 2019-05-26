@@ -12,6 +12,7 @@ public enum SniffableRequestHandlerRegistrable {
     case console(logginMode: ConsoleLoggingMode)
     case slack(slackToken: String, channel: String, username: String)
     case alternateDomain(domainURL: URL)
+    case slackHook(hooksUrl: String)
     
     public func requestHandler() -> SniffableRequestHandler {
         switch self {
@@ -21,6 +22,8 @@ public enum SniffableRequestHandlerRegistrable {
             return SlackSniffableRequestHandler(slackToken: slackToken, channel: channel, username: username)
         case .alternateDomain(let domainURL):
             return AlternateDomainSniffableRequestHandler(domainURL: domainURL)
+        case .slackHook(let hookUrl):
+            return SlackHookSniffableRequestHandler(hookUrl: hookUrl)
         }
     }
 }
