@@ -63,6 +63,8 @@ Intercepts all http and https requests that matches a given doman URL
 
 [SlackSniffableRequestHandler.swift](./NetworkInterceptor/Source/SniffableRequestHandler/SlackSniffableRequestHandler.swift) Sends the request in cURL format to a designated [Slack](https://slack.com) channel. You are required to provide your own Slack Authentication Token and slack channel ID for this to work.
 
+[SlackHookSniffableRequestHandler.swift](.NetworkInterceptor/Source/SniffableRequestHandler/SlackHookSniffableRequestHandler.swift) Sends the request in cURL format to a designated [Slack](https://slack.com) using [Webhooks](https://api.slack.com/incoming-webhooks). You are required to provide the Webhook url
+
 [AlternateDomainSniffableRequestHandler.swift](./NetworkInterceptor/Source/SniffableRequestHandler/AlternateDomainSniffableRequestHandler.swift)  Sends the copy of the request to an alternate domain
 
 ### Request Redirectors available
